@@ -25,7 +25,7 @@ def returnProb():
          'muscle_stiffness', 'Alopecia', 'Obesity']
     to_predict_list = []
     for x in X:
-        to_predict_list.append(int(request.args['cough']))
+        to_predict_list.append(int(request.args[x]))
     # to_predict_list.append(int(request.args['cough']))    
     # to_predict_list.append(int(request.args['fever']))
     # to_predict_list.append(int(request.args['sore_throat']))
