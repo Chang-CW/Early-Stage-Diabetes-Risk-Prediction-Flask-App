@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
-
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, 16)
@@ -24,19 +25,28 @@ def returnProb():
          'Itching', 'Irritability', 'delayed_healing', 'partial_paresis',
          'muscle_stiffness', 'Alopecia', 'Obesity']
     to_predict_list = []
-    for x in X:
-        to_predict_list.append(int(request.args[x]))
-    # to_predict_list.append(int(request.args['cough']))    
-    # to_predict_list.append(int(request.args['fever']))
-    # to_predict_list.append(int(request.args['sore_throat']))
-    # to_predict_list.append(int(request.args['shortness_of_breath']))
-    # to_predict_list.append(int(request.args['head_ache']))
-    # to_predict_list.append(int(request.args['age_60_and_above']))
-    # to_predict_list.append(int(request.args['gender']))
-    # to_predict_list.append(int(request.args['test_indication']))
+    # for x in X:
+    #     to_predict_list.append(int(request.args[x]))
+    # print(to_predict_list)
+    to_predict_list.append(int(request.args['Age']))    
+    to_predict_list.append(int(request.args['Gender']))
+    to_predict_list.append(int(request.args['Polyuria']))
+    to_predict_list.append(int(request.args['Polydipsia']))
+    to_predict_list.append(int(request.args['sudden_weight_loss']))
+    to_predict_list.append(int(request.args['weakness']))
+    to_predict_list.append(int(request.args['Polyphagia']))
+    to_predict_list.append(int(request.args['Genital_thrush']))
+    to_predict_list.append(int(request.args['visual_blurring']))
+    to_predict_list.append(int(request.args['Itching']))
+    to_predict_list.append(int(request.args['Irritability']))
+    to_predict_list.append(int(request.args['delayed_healing']))
+    to_predict_list.append(int(request.args['partial_paresis']))
+    to_predict_list.append(int(request.args['muscle_stiffness']))
+    to_predict_list.append(int(request.args['Alopecia']))
+    to_predict_list.append(int(request.args['Obesity']))
     d['output'] = str(ValuePredictor(to_predict_list))
     # return str(to_predict_list)
     return d
 
 if __name__ =="__main__":
-    app.run()
+    app.run(debug=True)
