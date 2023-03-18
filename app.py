@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
+from flask_cors import CORS
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins='*')
+CORS(app)
+#socketio = SocketIO(app, cors_allowed_origins='*')
 
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, 16)
